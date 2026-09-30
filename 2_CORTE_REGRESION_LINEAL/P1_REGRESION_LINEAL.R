@@ -1,0 +1,106 @@
+###################################################################
+######                                                       ######
+#                      UNIVERSIDAD DEL QUINDÍO                    #
+#                       PROGRAMA DE ECONOMIA                      #
+#                            ECONOMETRÍA I                        #
+######                                                       ######
+###################################################################
+
+# BY: Jose Luis Reyes Rodriguez
+# jlreyesr@uqvirtual.edu.co
+# +57 3163267404
+
+## REGRESIÓN LINEAL SIMPLE ----
+# https://microdatos.dane.gov.co/index.php/catalog/853
+
+getwd()
+options('scipen' = 100 , 'digits' = 4)
+rm(list = ls())
+
+# Paquetes o librerias ----
+library("skimr")
+library("readxl")
+library("stringr")
+library("stringi")
+library("haven")
+library("tidyverse")
+library("plyr")
+library("rstatix")
+library("descr")
+library("splitstackshape")
+library("e1071")
+## Cargamos la base de datos
+DATA = readxl::read_excel("C:/Users/EZEQUEL/Desktop/Jose 2026-2/Econometria Material/Beta_estimado.xlsx") |> data.frame()
+
+## Descriptivo-----
+head(DATA)
+str(DATA , list.len = 3)
+skimr::skim(DATA)
+## Ojo recordemos que es una muestra muy corta
+
+## Analisis descriptivo
+
+### Indicadores de posición y centro -----
+
+for (variable in c("Tasa.de.ahorro", "Tasa.de.interes")) {
+  
+  DATA |> 
+    
+    dplyr::summarise(
+      
+      variable       = variable,
+      
+      mediana        = median(.data[[variable]], na.rm = TRUE),
+      
+      media          = mean(.data[[variable]], na.rm = TRUE),
+      
+      rango_medio    = (max(.data[[variable]], na.rm = TRUE) - min(.data[[variable]], na.rm = TRUE)) / 2,
+      
+      minimo         = min(.data[[variable]], na.rm = TRUE),
+      
+      Q1             = quantile(.data[[variable]], 0.25, na.rm = TRUE),
+      
+      Q3             = quantile(.data[[variable]], 0.75, na.rm = TRUE),
+      
+      rango_q        = IQR(.data[[variable]], na.rm = TRUE),
+      
+      maximo         = max(.data[[variable]], na.rm = TRUE)
+      
+    ) |> 
+    
+    print()
+  
+}
+
+library(e1071)
+### Indicadores de dispersión --------
+
+for (variable in c("Tasa.de.ahorro", "Tasa.de.interes")) {
+  
+  DATA |> dplyr::group_by(1) |> dplyr::summarise(
+    
+    rango = (max(.data[[variable]]) - min(.data[[variable]])),
+    
+    sd = sd(.data[[variable]]) ,
+    
+    varianza = var(.data[[variable]]) ,
+    
+    c_variacion = (sd(.data[[variable]]) / mean(.data[[variable]]) *100) ,
+    
+    c_curtosis = kurtosis(.data[[variable]]) ,
+    
+    c_asimetria = skewness(.data[[variable]])
+    
+  ) |> print()
+  
+}
+cor(DATA$Tasa.de.ahorro, DATA$Tasa.de.interes, method = "pearson", use = "complete.obs")
+
+cor.test(DATA$Tasa.de.ahorro, DATA$Tasa.de.interes, method = "pearson")
+
+REG = lm(Tasa.de.ahorro ~ Tasa.de.interes , data = DATA)
+
+summary(REG)
+
+
+
