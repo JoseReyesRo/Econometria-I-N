@@ -98,9 +98,25 @@ cor(DATA$Tasa.de.ahorro, DATA$Tasa.de.interes, method = "pearson", use = "comple
 
 cor.test(DATA$Tasa.de.ahorro, DATA$Tasa.de.interes, method = "pearson")
 
+# Estimacion del modelo de regresion lineal -----
 REG = lm(Tasa.de.ahorro ~ Tasa.de.interes , data = DATA)
 
 summary(REG)
 
+# \widehat(y) = \widehat{\beta_{0}} + \widehat{\beta_{1}} \cdot x_{i} + \varepsilon_{1}
 
+mean(DATA$Tasa.de.interes)
 
+DATA = DATA |> dplyr::mutate(
+  x_2 = Tasa.de.interes^2 ,
+  x_XPRO = (Tasa.de.interes-mean(Tasa.de.interes)) ,
+  y_YPRO = (Tasa.de.ahorro-mean(Tasa.de.ahorro)) ,
+  x_XPRO_y_YPRO = (Tasa.de.interes-mean(Tasa.de.interes))*(Tasa.de.ahorro-mean(Tasa.de.ahorro)),
+  x_XPRO_2 = ((Tasa.de.interes-mean(Tasa.de.interes))^2) ,
+  y_EST = (2.183 + (1.717 * Tasa.de.interes)) ,
+  ERROR = (Tasa.de.ahorro-y_EST) ,
+  ERROR_2= ERROR^2
+)
+
+print("Beta_{1}) estimado")
+(sum(DATA$x_XPRO_y_YPRO)/sum(DATA$x_XPRO_2))
