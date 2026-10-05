@@ -12,7 +12,7 @@ $x_XPRO$ = (Tasa.de.interes-mean(Tasa.de.interes))
 
 $y_YPRO$ = (Tasa.de.ahorro-mean(Tasa.de.ahorro))
 
-$x_XPRO_y_YPRO$ = (Tasa.de.interes-mean(Tasa.de.interes))*(Tasa.de.ahorro-mean(Tasa.de.ahorro))
+$(x_XPRO)_y_(YPRO)$ = (Tasa.de.interes-mean(Tasa.de.interes))*(Tasa.de.ahorro-mean(Tasa.de.ahorro))
 
 $x_XPRO_2$ = ((Tasa.de.interes-mean(Tasa.de.interes))^2)
 
