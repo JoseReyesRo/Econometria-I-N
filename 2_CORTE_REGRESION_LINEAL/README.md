@@ -28,15 +28,15 @@ $SEC_i$ = (Tasa.de.ahorro-y_EST)^2
 
 $SCT_i$ = (Tasa.de.ahorro-mean(DATA$Tasa.de.ahorro))^2
 
-$Beta_{1} estimado$ = (sum(DATA$x_XPRO_y_YPRO)/sum(DATA$x_XPRO_2))
+$Beta_{1} estimado$ = 1.716667
 
-$Beta_{0}) estimado$ = mean(DATA$Tasa.de.ahorro) - (Beta_1_estimado*mean(DATA$Tasa.de.interes))
+$Beta_{0}) estimado$ = 2.183331
 
-$R_2$ = (1-(sum(DATA$SEC_i)/sum(DATA$SCT_i)))
+$R_2$ = 0.9390156
 
-$varianza ERROR$ = (sum(DATA$ERROR_2)/(20-2))
+$varianza ERROR$ = 2.551858
 
-$D Estandar ERROR$ = sqrt(2.551858)
+$D Estandar ERROR$ = 1.597454
 
 $\widehat{y_{i}} = 2.1833 + 1.7167 * Tasa.de.interes $
 
