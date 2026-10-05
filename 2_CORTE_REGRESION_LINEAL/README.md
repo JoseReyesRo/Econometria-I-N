@@ -6,21 +6,21 @@ $y_{i} =$ Tasa.de.ahorro
 
 $x_{i}$ = Tasa.de.interes
 
-$x_2$ = x_{i}^2
+$x_2$ =  x^{2}_{i}
 
-$x_XPRO$ = (Tasa.de.interes-mean(Tasa.de.interes))
+$x_XPRO$ = (x_{i} - \bar{X})
 
-$y_YPRO$ = (Tasa.de.ahorro-mean(Tasa.de.ahorro))
+$y_YPRO$ = (y_{i} - \bar{Y})
 
-$(x_XPRO)_y_(YPRO)$ = (Tasa.de.interes-mean(Tasa.de.interes))*(Tasa.de.ahorro-mean(Tasa.de.ahorro))
+$(x_XPRO)_y_(YPRO)$ = (x_{i} - \bar{X})\ast (y_{i} - \bar{Y})
 
-$x_XPRO_2$ = ((Tasa.de.interes-mean(Tasa.de.interes))^2)
+$x_XPRO_2$ = (x_{i} - \bar{X})^{2}
 
-$y_EST$ = (2.183 + (1.717 * Tasa.de.interes))
+$y_EST$ = (2.183 + (1.717 * x_{i}))
 
-$ERROR$ = (Tasa.de.ahorro-y_EST)
+$ERROR$ = (Tasa.de.ahorro-\hat{y})
 
-$ERROR_2$ = ERROR^2
+$ERROR_2$ = \widehat{\varepsilon _{i}}^2
 
 $SCR_i$ = (y_EST - mean(DATA$Tasa.de.ahorro))^2
 
