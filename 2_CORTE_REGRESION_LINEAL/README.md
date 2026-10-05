@@ -6,7 +6,7 @@ $y_{i} =$ Tasa.de.ahorro
 
 $x_{i}$ = Tasa.de.interes
 
-$x_2$ = Tasa.de.interes^2
+$x_2$ = x_{i}^2
 
 $x_XPRO$ = (Tasa.de.interes-mean(Tasa.de.interes))
 
