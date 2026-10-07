@@ -145,3 +145,73 @@ print("varianza ERROR")
 
 print("D Estandar ERROR")
 sqrt(2.551858)
+
+# Corremos la regresión lineal simple
+?lm()
+#summary(lm( Tasa.de.ahorro ~ Tasa.de.interes , data = DATA ))
+REG = lm( Tasa.de.ahorro ~ Tasa.de.interes , data = DATA )
+summary(REG)
+
+# Lectura de resultados ---------
+### Residuos de la regresión ----------
+print("Residuos")
+
+"
+  Min   |     1Q   |   Median |    3Q   |   Max 
+-3.9167 |  -0.7250 |   0.1583 |  0.8708 | 2.3833 
+"
+
+print("El error estandar")
+"\\widehat{\\sigma}
+Residual standard error: 1.597 = 1.6
+"
+
+# Bonda de ajuste del modelo ----------
+print("R^{2}")
+
+"
+Multiple R-squared:  0.939,	Adjusted R-squared:  0.9356 
+"
+
+print("F-statistic")
+"
+F-statistic: 277.2 on 1 and 18 DF,  p-value: 2.226e-12
+"
+
+# H_{0}: \beta_{1} = 0
+
+
+#Signif. codes:  0 ‘*’ 100% de confianza
+#0.001 ‘**’ 99,99% de confianza
+#0.01 ‘*’ 99% de confianza
+#0.05 ‘.’ 95% de confianza
+#0.1 ‘ ’ 90% de confianza
+#1 0% de confianza
+
+
+print("Coeficientes del modelo")
+
+# \Beta_{0} Intercepto
+"
+Coefficients:
+              |  Estimate | Std. Error | t value |  Pr(>|t|)    
+(Intercept)   |    2.1833 |   0.8054   |  2.711  |  0.0143 *  
+"
+
+#\Beta_{1}
+"
+                | Estimate |  Std. Error |  t value  | Pr(>|t|)    
+Tasa.de.interes |  1.7167  |   0.1031    |   16.648  | 2.23e-12 * = 0.00000000022
+"
+
+anova(REG)
+
+
+# Residuos del modelo
+residuos = rstandard(REG)
+valores.ajustados = fitted(REG)
+plot(valores.ajustados , residuos)
+
+
+qqnorm(residuos)
+qqline(residuos)
