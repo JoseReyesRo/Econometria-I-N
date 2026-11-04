@@ -60,13 +60,28 @@ library( "stargazer") # Libreria para pintar tablas de regresiones o tablas desc
  
  m1 = lm(childMort ~ water , data = dataWorld_q[dataWorld_q$quinq == "2000-2004",] )
  m2 = lm(childMort ~ sanitat , data = dataWorld_q[dataWorld_q$quinq == "2000-2004",] )
- 
+ m3 = lm(childMort ~ vaccMeas , data = dataWorld_q[dataWorld_q$quinq == "2000-2004",] )
+ m4 = lm(childMort ~ teenFert , data = dataWorld_q[dataWorld_q$quinq == "2000-2004",] )
  
  stargazer(m1 , m2 , type = "text", single.row = TRUE , 
            model.numbers =  FALSE , object.names = TRUE ,
            omit.stat = c("ser" , "f") ,star.cutoffs =  c(0.05 , 0.01 , 0.001) )
  
+ m5 = lm(childMort ~ yearSchF , data = dataWorld_q[dataWorld_q$quinq == "2000-2004",] )
+ m6 = lm(childMort ~ log10(incomePp) , data = dataWorld_q[dataWorld_q$quinq == "2000-2004",] )
+ m7 = lm(childMort ~ income10p , data = dataWorld_q[dataWorld_q$quinq == "2000-2004",] )
+ m8 = lm(childMort ~ gini , data = dataWorld_q[dataWorld_q$quinq == "2000-2004",] )
+ 
+ stargazer(m5 , m6 , m7 , m8 , type = "text", single.row = TRUE , 
+           model.numbers =  FALSE , object.names = TRUE ,
+           omit.stat = c("ser" , "f") ,star.cutoffs =  c(0.05 , 0.01 , 0.001) )
  
  
+ # Corremos regresiones multiples
+ m9 <- lm(childMort ~ water + sanitat + vaccMeas,
+          data = dataWorld_q[dataWorld_q$quinq == "2000-2004",] ) 
+ 
+ m10 <- lm(childMort ~ water + sanitat + vaccMeas,
+           data = dataWorld_q[dataWorld_q$quinq == "2000-2004",] ) 
  
  
